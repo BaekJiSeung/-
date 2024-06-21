@@ -10,7 +10,7 @@ FOI는 감염병의 전파를 이해하고 예측하는 것에 핵심적인 역�
 
 데이터
 
-이 코드에서는 두 개의 CSV 파일(seroprevalence_uk.csv 및 seroprevalence_china.csv)을 사용한다. 
+이 코드에서는 연령에 따른 혈청유병률의 데이터인 두 개의 CSV 파일(seroprevalence_uk.csv 및 seroprevalence_china.csv)과 measles의 시간 경과에 따른 감염자수를 나타내는 'incidence_measles.csv' 을 사용한다. 
 이 파일들은 각기 다른 지역(영국과 중국)에서 수집된 혈청 유병률 데이터를 포함하고 있다. 
 영국은 중국에 비해 더 많은 표본을 가지고 있다.
 
@@ -57,11 +57,12 @@ H = 1 - 1/R0 d의 값을 가진다. 예를 들어 H = 0.8이라면 전체의 80�
 
 우선 클래스에 연령대(time_stamp), 혈청 유병률 데이터(data), 초기 추정치(initial_guess)를 input으로 받아서 infectious를 추정할 수 있는 메소드인 get_seroprev_from_foi 메소드를 입력한다.
 그리고 주어진 자료와 최소한의 오차를 가질수 있게 최적화할 수 있는 objective_function 메소드를 입력한다.
-
-이 두 는 초기 추정치를 기반으로 예상 혈청 유병률(expected)을 계산하고, 실제 데이터와의 오차(error)를 계산, 최적화된 FOI(est)를 찾기 위해 least square method를 통해 오차를 최소화한다.
+이 두 메소드 는 초기 추정치를 기반으로 예상 혈청 유병률(expected)을 계산하고, 실제 데이터와의 오차(error)를 계산, 최적화된 FOI(est)를 찾기 위해 least square method를 통해 오차를 최소화한다.
+seroprevalence_uk.csv 및 seroprevalence_china.csv의 데이터를  통해 각각의 foi과 오차를 측정한다.
 초기 추정치와 최적화된 추정치를 비교하기 위해 그래프를 통해 데이터를 시각화한다.
-CSV 파일로부터 데이터를 읽어와 혈청 유병률을 계산하고, 이를 기반으로 FOI를 추정한다.
-각 분석 결과를 출력하여 초기 오차, 최적화된다.
+foi를 통해 R0, H를 구하여 실질적인 전염병 해소에 도움이 되는 수치들을 계산할 수 있다.
+데이터가 더 많은 uk의 경우 연령별로 데이터를 두 파트로 나누어 각각에서 다시 계산본다. 이를 통해 measles의 나이에 다른 감염률의 차이를 확인할 수 있다.
+위에서 계산한 전염률을 통해 SEIR모델링을 활용하여 시간에 따른 infectious 수치를 계산, 실제 관측된 'incidence_measles.csv'데이터와 어떤 차이를 보이는지 그래프를 통해 확인한다.
 
 퍼포먼스 
 
