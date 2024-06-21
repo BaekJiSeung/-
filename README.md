@@ -28,7 +28,7 @@ Na: 특정 연령대에서 조사된 전체 사람 수
 
 expected = 1 - exp(-initial_guess * time_stamp): 초기 추정치(initial_guess)를 기반으로 계산된 혈청 유병률
 error = sum((expected - data) ** 2): 초기 추정치와 실제 데이터 간의 오차 제곱합
-Catalytic Model을 이용해 오차를 최소화하는 λ 값을 찾기 위해 scipy.optimize 모듈의 minimize 함수를 사용한다.
+Susceptible과 ever infected 사이의 관계를 나타내는 Catalytic Model을 이용해 오차를 최소화하는 λ 값을 찾기 위해 scipy.optimize 모듈의 minimize 함수를 사용한다.
 Susceptible(감염가능성있음) 에서 Ever Infected 로 가는 비율을 λ로 계산하여 실제 데이터의 그래프와 가장 적은 오차를 가지는 foi 값을 구할 수 있다.
 이 과정에서 주어진 초기 추정치(initial_guess)를 사용하여 최적화를 한다.
 
